@@ -71,8 +71,8 @@ echo "Material,Cost,Type"$'\n' >> raw_material_cost.csv
 echo "Created raw_material_cost.csv"
 echo "username,password,firstname,lastname"$'\n' >> users.csv
 echo "Created users.csv"
-# wget
-# echo "Downloaded launch.bash"
-# wget
-# echo "Downloaded operating.bash"
-echo "All files have been created. Please configure all files before launching and operating."
+wget https://github.com/MintedKitten/BusinessManagementScripts/blob/main/launch.bash
+echo "Downloaded launch.bash"
+wget https://github.com/MintedKitten/BusinessManagementScripts/blob/main/operating.bash
+echo "Downloaded operating.bash"
+echo "All files have been created and downloaded. Please configure all files before launching and operating."
