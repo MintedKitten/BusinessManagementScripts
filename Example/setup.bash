@@ -2,7 +2,7 @@
 echo "For Example, See https://github.com/MintedKitten/BusinessManagementScripts"
 # Check packages, yad if not install prompt to install
 PACKAGE="yad"
-CHECK=$(dnf list installed | grep "$PACKAGE")
+CHECK=$(sudo dnf list installed | grep "$PACKAGE")
 PREQ=0
 if [[ "$CHECK" == "$PACKAGE".* ]]
 then
@@ -14,8 +14,8 @@ then
 	read reply
 	if [[ "$reply" == "y" || "$reply" == "Y" || "$reply" == "yes" || "$reply" == "YES" ]]
 	then
-		dnf -y install epel-next-release
-		dnf -y install "$PACKAGE"
+		sudo dnf -y install epel-next-release
+		sudo dnf -y install "$PACKAGE"
 	else
 		echo "setup terminating"
 		exit 1
@@ -71,8 +71,8 @@ echo "Material,Cost,Type"$'\n' >> raw_material_cost.csv
 echo "Created raw_material_cost.csv"
 echo "username,password,firstname,lastname"$'\n' >> users.csv
 echo "Created users.csv"
-wget https://github.com/MintedKitten/BusinessManagementScripts/blob/main/launch.bash
+wget https://raw.githubusercontent.com/MintedKitten/BusinessManagementScripts/main/launch.bash
 echo "Downloaded launch.bash"
-wget https://github.com/MintedKitten/BusinessManagementScripts/blob/main/operating.bash
+wget https://raw.githubusercontent.com/MintedKitten/BusinessManagementScripts/main/operating.bash
 echo "Downloaded operating.bash"
 echo "All files have been created and downloaded. Please configure all files before launching and operating."
