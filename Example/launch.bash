@@ -2,11 +2,9 @@
 # Management Files
 # Start with a Splash Screen
 # Get restaurant name rom Business.conf
-echo -e "\e[38;5;214mDebug\e[39m"
 CONF=$(cat Business.conf)
 INDEX=`expr index "$CONF" =`
 NAME="${CONF:$INDEX}"
-echo "$NAME" #debug business name
 # GUI using yad and zenity (zenity also would've worked but less flexible)
 # Display to text-info fontsize is 32 name in the middle
 FONT_SIZE=32
@@ -16,7 +14,6 @@ yad --info --title="Management Software" --text="$TEXT" --no-wrap --justify="cen
 # First Input Username and Password
 USRPSW=$(yad --geometry=300x150 --text="Please Login" --justify="center" --title "Management Software" --form --field="Username" --field="Password:H")
 OPTION=$?
-echo "$OPTION"
 if [ "$OPTION" -ne 0 ]
 then
 	TEXT='<span foreground="red" font="'"$FONT_SIZE"'">Login was Canceled</span>'
@@ -26,7 +23,6 @@ fi
 echo "$USRPSW"  #debug username password
 USERNAME=$(echo "$USRPSW" | awk 'BEGIN {FS="|"} {print $1}')
 PASSWORD=$(echo "$USRPSW" | awk 'BEGIN {FS="|"} {print $2}')
-echo "$USERNAME and $PASSWORD" #debug username password
 # Read user account file, read csv file
 FILE=users.csv
 OLDIFS=$IFS
@@ -45,7 +41,6 @@ do
 	fi
 done < $FILE
 IFS=$OLDIFS
-echo "$MATCH and $USERINFO"
 # If there's a user in database, login, otherwise, error and exit
 if [ "$MATCH" -ne 1 ]
 then
@@ -59,7 +54,6 @@ yad --info --title="Login Successfully" --text="$TEXT" --no-buttons --timeout=3 
 # Check Date and Raw Material of Current Date, if exists display value and edit button, otherwise display new and new file
 # Check if file exists, no create new, yes skip
 NOW=$(date +%d-%m-%y)
-echo "$NOW"
 STOCKFILE=Daily_Stock/stock_$NOW.csv
 if [ ! -f "$STOCKFILE" ]
 then
@@ -82,7 +76,6 @@ then
 	TEXT='<span>Can'"'"'t find today'"'"'s Stock File.</span>\n<span>Created a new file at </span><b>'"$STOCKFILE"'</b><span></span>'
 	yad --info --title="Management Software" --text="$TEXT" --timeout=2 --no-buttons	
 fi
-echo "$(cat $STOCKFILE)"
 # Read the stock file, display the current amount, and Close or Edit
 TEXT="Current Raw Materials Amount - $NOW"$'\n'"Total cost ="
 YADLIST="--title="'"'"Today""'""s Stock"'"'" --button=Close!gtk-cancel:1 --button=Edit!gtk-edit:0 --list --no-selection --column=Material --column=Cost --column=Amount -- "
@@ -104,7 +97,6 @@ IFS=$OLDIFS
 YADLIST="yad --text="'"'"$TEXT $TOTAL"'"'" $YADLIST"
 eval "$YADLIST"
 OPTION="$?"
-echo "$OPTION"
 if [ "$OPTION" -ne 0 ]
 then
 	TEXT='<span font="'"$FONT_SIZE"'">Exiting Management Software</span>\nThank you.'
@@ -136,7 +128,6 @@ then
 	yad --info --title="Management Software" --text="$TEXT" --no-buttons --timeout=2 --justify="center"
 	exit 0
 fi
-echo "$OPTION $RESTOCK $NUM"
 FILE=$STOCKFILE
 OLDIFS=$IFS
 IFS=","

@@ -1,7 +1,6 @@
 #!/bin/bash 
 # Operating Files
 # Read menu, display in form with scroll number, then display the order
-echo -e "\e[38;5;214mDebug\e[39m"
 CONF=$(cat Business.conf)
 INDEX=`expr index "$CONF" =`
 NAME="${CONF:$INDEX}"
@@ -9,7 +8,6 @@ FONT_SIZE=32
 TEXT='<span font="'"$FONT_SIZE"'">Welcome to</span>\n<span font="'"$FONT_SIZE"'"><b>'"$NAME"'</b></span>\n<span font="'"$FONT_SIZE"'">Ordering Software</span>'
 yad --info --title="Ordering Software" --text="$TEXT" --no-wrap --justify="center" --no-buttons --geometry=300x200 --timeout=2
 NOW=$(date +%d-%m-%y)
-echo "$NOW"
 SELLFILE=Daily_Sell/sell_$NOW.csv
 if [ ! -f "$SELLFILE" ]
 then
@@ -18,7 +16,6 @@ then
 	yad --info --title="Ordering Software" --text="$TEXT" --timeout=2 --no-buttons
 	echo "Id,Name,Price,Order" >> "$SELLFILE"
 fi
-echo "$(cat $SELLFILE)"
 # Read the file compute the Total Price as Revenue
 FILE=$SELLFILE
 OLDIFS=$IFS
@@ -59,10 +56,8 @@ do
 	NUM=`expr $NUM + 1`
 done < $FILE
 IFS=$OLDIFS
-echo "$NUM"
 NAMEORDER=$(eval "$YADFORM")
 OPTION="$?"
-echo "$NAMEORDER $OPTION"
 if [ "$OPTION" -ne 0 ]
 then
 	TEXT='<span font="'"$FONT_SIZE"'">Exit Ordering Software</span>\nExiting..'
@@ -92,7 +87,6 @@ then
 	yad --info --image=dialog-warning --title="Ordering Software" --text="$TEXT" --no-buttons --timeout=2 --justify="center"
 	exit 0
 fi
-echo "$CUSNAME $ORDER"
 FILE=menu.csv
 OLDIFS=$IFS
 IFS=","
@@ -106,7 +100,6 @@ do
 	PRICE=`expr "$PRICE" + $(("$SUBPRICE" * "$price"))`
 done < $FILE
 IFS=$OLDIFS
-echo "$PRICE"
 NEXTID=`expr $LASTID + 1`
 echo "$NEXTID,$CUSNAME,$PRICE,$ORDER" >> "$SELLFILE"
 TEXT='<span  font="'"$FONT_SIZE"'">Thank you for purchasing!</span>\n'"Order ID = $NEXTID"'\n'"Customer name = $CUSNAME"'\n'"Price = $PRICE"
