@@ -87,7 +87,7 @@ echo "Downloaded launch.bash"
 wget https://raw.githubusercontent.com/MintedKitten/BusinessManagementScripts/main/operating.bash
 echo "Downloaded operating.bash"
 wget https://raw.githubusercontent.com/MintedKitten/BusinessManagementScripts/main/autotask.bash
-echo 'YESTERDAY=$(date -d yesterday +%d-%m-%y)\nOLDPATH=$PATH
+echo '#!/bin/bash\nYESTERDAY=$(date -d yesterday +%d-%m-%y)\nOLDPATH=$PATH
 PATH='"$PWD"$'\n'"$(cat autotask.bash)" >> autotask.bash
 echo "Downloaded autotask.bash"
 chmod 777 launch.bash operating.bash autotask.bash

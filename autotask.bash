@@ -1,7 +1,3 @@
-#!/bin/bash 
-YESTERDAY=$(date -d yesterday +%d-%m-%y)
-OLDPATH=$PATH
-PATH=/home/user/Business
 ACCOUNTFILE=$PATH/Daily_Accounting/accounting_$YESTERDAY.csv
 STOCKFILE=$PATH/Daily_Stock/stock_$YESTERDAY.csv
 SELLFILE=$PATH/Daily_Sell/sell_$YESTERDAY.csv
