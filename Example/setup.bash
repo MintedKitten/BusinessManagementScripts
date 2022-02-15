@@ -87,10 +87,11 @@ echo "Downloaded launch.bash"
 wget https://raw.githubusercontent.com/MintedKitten/BusinessManagementScripts/main/operating.bash
 echo "Downloaded operating.bash"
 wget https://raw.githubusercontent.com/MintedKitten/BusinessManagementScripts/main/autotask.bash
+echo '#!/bin/bash'$'\n''YESTERDAY=$(date -d yesterday +%d-%m-%y)'$'\n''OLDPATH=$PATH'$'\n''PATH='"$PWD"$'\n'"$(cat autotask.bash)" >> autotask.bash.tmp
+cp -f autotask.bash.tmp autotask.bash
+rm autotask.bash.tmp
 echo "Downloaded autotask.bash"
 chmod 777 launch.bash operating.bash autotask.bash
-echo '#!/bin/bash\nYESTERDAY=$(date -d yesterday +%d-%m-%y)\nOLDPATH=$PATH
-PATH='"$PWD"$'\n'"$(cat autotask.bash)" >> autotask.bash
 echo "All files have been created and downloaded. Please configure all files before launching, and operating."
 # Setup for Automation
 echo "#!/bin/bash"$'\n'"@daily $PWD/autotask.bash" >> automate.cr
