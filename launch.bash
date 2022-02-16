@@ -20,7 +20,6 @@ then
 	yad --info --image=dialog-warning --geometry=300x50 --title="Abort Management Software" --text="$TEXT" --no-buttons --timeout=3 --justify="center"
 	exit 0
 fi
-echo "$USRPSW"  #debug username password
 USERNAME=$(echo "$USRPSW" | awk 'BEGIN {FS="|"} {print $1}')
 PASSWORD=$(echo "$USRPSW" | awk 'BEGIN {FS="|"} {print $2}')
 # Read user account file, read csv file
