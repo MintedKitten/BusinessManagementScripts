@@ -1,6 +1,7 @@
 ```mermaid
 flowchart TD;
-A-->B;
-A-->C;
+A{Hello}--No-->B;
+A--Yes-->C;
 B-->D;
 C-->D;
+```
